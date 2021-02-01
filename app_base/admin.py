@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+
 from app_base import models
-from app_base.models import TimeSheet, TimeSheetDetail
+from app_base.models import TimeSheet, TimeSheetDetail, Project
 
 
 class TimeSheetDetailsInline(admin.TabularInline):
@@ -10,15 +10,24 @@ class TimeSheetDetailsInline(admin.TabularInline):
 
 
 class TimeSheetAdmin(admin.ModelAdmin):
+    list_display = ('employee', 'fortnight', 'month', 'year')
+    list_filter = ('fortnight', 'month', 'year')
+    search_fields = ['employee__last_name', 'employee__first_name', ]
     inlines = [TimeSheetDetailsInline]
 
     class Meta:
         model = TimeSheet
 
 
-admin.site.register(models.TimeSheet, TimeSheetAdmin)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('acronym', 'name', 'is_active')
 
-admin.site.register(models.Project)
+    class Meta:
+        model = Project
+
+
+admin.site.register(models.TimeSheet, TimeSheetAdmin)
+admin.site.register(models.Project, ProjectAdmin)
 admin.site.register(models.Employee)
 
 # admin.site.register(models.TimeSheetDetail)
