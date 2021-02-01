@@ -23,7 +23,7 @@ SECRET_KEY = 'tbc&3(!*n0#)&sc3wf0$+msd#e5-a*fdpe!xi70yur^3fw3^#6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['stormy-ravine-40537.herokuapp.com']
 
 # Application definition
 
