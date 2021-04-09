@@ -26,7 +26,7 @@ class TimeSheet(models.Model):
     Q1 = 'Q1'
     Q2 = 'Q2'
     FORTNIGHT = [(Q1, 'Q1'), (Q2, 'Q2')]
-    employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
+    employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, related_name="timesheets", null=True)
     fortnight = models.CharField(max_length=2, choices=FORTNIGHT)
     month = models.IntegerField()
     year = models.IntegerField()
@@ -41,8 +41,8 @@ class TimeSheet(models.Model):
 
 
 class TimeSheetDetail(models.Model):
-    timesheet = models.ForeignKey(TimeSheet, on_delete=models.SET_NULL , null=True)
-    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
+    timesheet = models.ForeignKey(TimeSheet, related_name="timesheet_details", on_delete=models.SET_NULL, null=True)
+    project = models.ForeignKey(Project, related_name="timesheet_projects", on_delete=models.SET_NULL, null=True)
     hours = models.FloatField()
 
     class Meta:
